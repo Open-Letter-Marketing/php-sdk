@@ -8,7 +8,7 @@
 
 namespace Olc\core;
 
-use Olc\api\{ApiKeys, OrderDetailsApi, OrdersApi, ProductApi, UserApi, CustomFieldsApi, TemplatesApi};
+use Olc\api\{OrderDetailsApi, OrdersApi, ProductApi, UserApi, CustomFieldsApi, TemplatesApi};
 
 class OlcInstance {
 	/**

@@ -1,0 +1,34 @@
+{
+  "name": "olc/olc-php",
+  "description": "A PHP SDK from OLC Platform",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "autoload": {
+    "psr-4": {
+      "Olc\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "usman-olc",
+      "email": "usman@openletterconnect.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "config": {
+    "process-timeout": 1800
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit src/tests"
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.8",
+    "peridot-php/object-path": "^1.0",
+    "vlucas/phpdotenv": "^5.6",
+    "symfony/polyfill-php83": "^1.29"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest",
+    "phpunit/phpunit": "10.5.20"
+  }
+}

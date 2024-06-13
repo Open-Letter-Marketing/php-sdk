@@ -1,0 +1,10 @@
+.idea
+composer.lock
+vendor
+*.*bak*
+.env
+phpunit.xml
+.phpunit.result.cache
+*.zip
+*.rar
+main*.php

@@ -19,7 +19,8 @@
     "process-timeout": 1800
   },
   "scripts": {
-    "test": "vendor/bin/phpunit src/tests"
+    "test": "vendor/bin/phpunit src/tests",
+    "generate:docs": "php phpDocumentor.phar -d src -t docs"
   },
   "require": {
     "guzzlehttp/guzzle": "^7.8",

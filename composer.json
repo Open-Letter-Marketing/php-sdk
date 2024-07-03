@@ -1,6 +1,10 @@
 {
   "name": "olc/olc-php",
   "description": "A PHP SDK from OLC Platform",
+  "keywords": [
+    "openletterconnect",
+    "php"
+  ],
   "version": "1.0.0",
   "license": "Apache-2.0",
   "autoload": {
@@ -15,6 +19,7 @@
     }
   ],
   "minimum-stability": "stable",
+  "prefer-stable": true,
   "config": {
     "process-timeout": 1800
   },
@@ -23,6 +28,7 @@
     "generate:docs": "php phpDocumentor.phar -d src -t docs"
   },
   "require": {
+    "php": ">=7.4",
     "guzzlehttp/guzzle": "^7.8",
     "peridot-php/object-path": "^1.0",
     "vlucas/phpdotenv": "^5.6",

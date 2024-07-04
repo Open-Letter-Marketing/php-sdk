@@ -9,6 +9,7 @@
 namespace Olc\api;
 
 use Olc\core\BaseApi;
+use Olc\core\OlcRequestError;
 
 
 class ProductApi extends BaseApi {
@@ -22,7 +23,7 @@ class ProductApi extends BaseApi {
 	 *
 	 * @param array $params Parameters to send with the request.
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function all(array $params = []): array {
 		$request = $this->getInstance()->getRequest();
@@ -44,7 +45,7 @@ class ProductApi extends BaseApi {
 	 *
 	 * @param array $params Parameters to send with the request.
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function productTypes(array $params = []): array {
 		$request = $this->getInstance()->getRequest();
@@ -66,7 +67,7 @@ class ProductApi extends BaseApi {
 	 *
 	 * @param string $productType Product type
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function getDetailsByType(string $productType): array {
 		$request = $this->getInstance()->getRequest();
@@ -89,7 +90,7 @@ class ProductApi extends BaseApi {
 	 *
 	 * @param int $templateId The template ID
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function getTemplateById(int $templateId): array {
 		$request = $this->getInstance()->getRequest();

@@ -9,6 +9,7 @@
 namespace Olc\api;
 
 use Olc\core\BaseApi;
+use Olc\core\OlcRequestError;
 use Olc\errors\InvalidConfigException;
 use Olc\errors\NotImplemented;
 
@@ -95,20 +96,7 @@ class OrdersApi extends BaseApi {
 	 * ?>
 	 * </code>
 	 *
-	 * @param array{source?: string, paymentStatus?: string, orderStatus?: string} $params *(optional)* Additional options pass to the request
-	 * @param $params ['source'] *(optional)* The source, should be one of them:
-	 *   - `'OLC_CLIENT'`
-	 *   - `'ZAPIER'`
-	 *   - `'HUBSPOT'`
-	 *   - `'SALESFORCE'`
-	 *   - `'PODIO'`
-	 *   - `'GOHIGHLEVEL'`
-	 * @param $params ['paymentStatus'] *(optional)* The payment status, should be one of them:
-	 *   - `'PENDING'`
-	 *   - `'PAID'`
-	 *   - `'PAYMENT_FAILED'`
-	 *   - `'NOT_CHARGED'`
-	 * @param $params ['orderStatus'] *(optional)* The order status, should be one of them:
+	 * @param array $params ['orderStatus'] *(optional)* The order status, should be one of them:
 	 *   - `'ON_HOLD'`
 	 *   - `'SCHEDULED'`
 	 *   - `'PROCESSING'`
@@ -116,9 +104,10 @@ class OrdersApi extends BaseApi {
 	 *   - `'CANCELED'`
 	 * @return array{message: string, data: array{
 	 *     source: array<string>,
-	 * 	   paymentStatus: array<string>,
+	 *       paymentStatus: array<string>,
 	 *     orderStatus: array<string>}} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws InvalidConfigException
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function filtersData(array $params = []): array {
 		$query = [];

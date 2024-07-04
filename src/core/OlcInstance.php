@@ -18,7 +18,7 @@ class OlcInstance {
 
 	private OlcRequest $request;
 
-	public function __construct(string $apiKey, string|null $version = null, string|null $endpoint = null) {
+	public function __construct(string $apiKey, ?string $version = null, ?string $endpoint = null) {
 		$this->request = new OlcRequest($version, $endpoint);
 		$this->request->setApiKey($apiKey);
 	}
@@ -28,7 +28,7 @@ class OlcInstance {
 	 * @param class-string $className API FQN class name
 	 * @return mixed API instance
 	 */
-	protected function retrieveApiInstance(string $className): mixed {
+	protected function retrieveApiInstance(string $className) {
 		if (!array_key_exists($className, $this->registry)) {
 			$instance = new $className($this);
 			$this->registry[$className] = $instance;

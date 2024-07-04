@@ -20,7 +20,7 @@ abstract class Olc {
 	 * e.g. "https://api.openletterconnect.com"
 	 * @return OlcInstance The OLC instance.
 	 */
-	final public static function create(string $apiKey, string|null $version = null, string|null $endpoint = null): OlcInstance {
+	final public static function create(string $apiKey, ?string $version = null, ?string $endpoint = null): OlcInstance {
 		return new OlcInstance($apiKey, $version, $endpoint);
 	}
 }

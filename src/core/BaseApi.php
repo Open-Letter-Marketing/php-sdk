@@ -10,10 +10,15 @@ namespace Olc\core;
 
 abstract class BaseApi {
 	/**
-	 * BaseApi constructor.
-	 * @param OlcInstance $_olcInstance OlcInstance that this API is associated with
+	 * OlcInstance that this API is associated with
 	 */
-	public function __construct(private OlcInstance $_olcInstance) {
+	private OlcInstance $_olcInstance;
+
+	/**
+	 * BaseApi constructor.
+	 */
+	public function __construct(OlcInstance $olcInstance) {
+		$this->_olcInstance = $olcInstance;
 	}
 
 	/**

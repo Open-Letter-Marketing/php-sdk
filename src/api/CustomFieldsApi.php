@@ -9,6 +9,7 @@
 namespace Olc\api;
 
 use Olc\core\BaseApi;
+use Olc\core\OlcRequestError;
 use Olc\errors\InvalidConfigException;
 
 class CustomFieldsApi extends BaseApi {
@@ -29,7 +30,7 @@ class CustomFieldsApi extends BaseApi {
 	 *       defaultValue: string,
 	 *       strict: bool}
 	 * } The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function all(array $params = []): array {
 		$request = $this->getInstance()->getRequest();
@@ -54,7 +55,7 @@ class CustomFieldsApi extends BaseApi {
 	 *
 	 * @param array{page?: int, perPage?: int} $params Parameters to send with the request.
 	 * @return array The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function allPaginated(array $params = []): array {
 		$request = $this->getInstance()->getRequest();
@@ -76,7 +77,7 @@ class CustomFieldsApi extends BaseApi {
 	 *
 	 * @param int $id The custom field id
 	 * @return array The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function get(int $id): array {
 		$request = $this->getInstance()->getRequest();
@@ -97,7 +98,7 @@ class CustomFieldsApi extends BaseApi {
 	 *
 	 * @param int $id The custom field id
 	 * @return array The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function delete(int $id): array {
 		$request = $this->getInstance()->getRequest();
@@ -127,7 +128,8 @@ class CustomFieldsApi extends BaseApi {
 	 *     creator: null|array,
 	 *     createdAt: string }
 	 * } The result of the request
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws InvalidConfigException
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function create(string $name): array {
 		//<editor-fold desc="Params basic validation">
@@ -166,7 +168,8 @@ class CustomFieldsApi extends BaseApi {
 	 *     creator: null|array,
 	 *     createdAt: string }
 	 * } The result of the request
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws InvalidConfigException
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function update(int $id, string $name): array {
 		//<editor-fold desc="Params basic validation">

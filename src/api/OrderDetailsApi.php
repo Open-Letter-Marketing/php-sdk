@@ -9,6 +9,7 @@
 namespace Olc\api;
 
 use Olc\core\BaseApi;
+use Olc\core\OlcRequestError;
 use Olc\errors\InvalidConfigException;
 
 class OrderDetailsApi extends BaseApi {
@@ -33,19 +34,10 @@ class OrderDetailsApi extends BaseApi {
 	 * </code>
 	 *
 	 * @param int $orderId The order ID
-	 * @param array{search?: string, addressStatus?: string, mailedStatus?: string} $params Optional parameters pass to the request
-	 * @param string $params ['search'] - Search term for filtering results (e.g., 'NY')
-	 * @param string $params ['addressStatus'] - Filter results by address status, one of the
-	 *  - `'Failed'`
-	 *  - `'Verified'`
-	 *  - `'Corrected'`
-	 * @param string $params ['mailedStatus'] - Filter results by mailed status, one of the
-	 *  - `'Mailed'`
-	 *  - `'Completed'`
-	 *  - `'Processing'`
 	 * @param array{startDate: string, endDate: string} $params ['deliveredDate'] - Filter results by delivered date range
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws InvalidConfigException
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function allContacts(int $orderId, array $params = []): array {
 		if (\array_key_exists('search', $params)
@@ -86,7 +78,7 @@ class OrderDetailsApi extends BaseApi {
 	 *
 	 * @param int $orderId The order ID
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function get(int $orderId): array {
 		$request = $this->getInstance()->getRequest();
@@ -107,7 +99,7 @@ class OrderDetailsApi extends BaseApi {
 	 *
 	 * @param int $orderId The order ID
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function analytics(int $orderId): array {
 		$request = $this->getInstance()->getRequest();

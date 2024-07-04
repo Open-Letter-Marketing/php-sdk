@@ -12,6 +12,7 @@ use Olc\core\BaseApi;
 use GuzzleHttp\Psr7\Utils;
 use Olc\errors\{InvalidConfigException, NotFoundException};
 use Olc\helpers\{CustomFieldsHelper, FileHelper, UrlHelper};
+use Olc\core\OlcRequestError;
 
 class TemplatesApi extends BaseApi {
 	/**
@@ -27,7 +28,7 @@ class TemplatesApi extends BaseApi {
 	 *
 	 * @param array{page?: int, pageSize?: int, isShared?: bool} $params Parameters to send with the request.
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function all(array $params = []): array {
 		$request = $this->getInstance()->getRequest();
@@ -84,7 +85,8 @@ class TemplatesApi extends BaseApi {
 	 *     createdAt: string,
 	 *     updatedAt: string }
 	 * } The result of the request
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
+	 * @throws InvalidConfigException
 	 */
 	public function create(array $params = []): array {
 		//<editor-fold desc="Params basic validation">
@@ -170,7 +172,8 @@ class TemplatesApi extends BaseApi {
 	 *     createdAt: string,
 	 *     updatedAt: string }
 	 * } The result of the request
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
+	 * @throws InvalidConfigException
 	 */
 
 	public function update(int $id, array $fields): array {
@@ -228,7 +231,7 @@ class TemplatesApi extends BaseApi {
 	 *
 	 * @param int $id The template ID
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function get(int $id): array {
 		$request = $this->getInstance()->getRequest();
@@ -249,7 +252,7 @@ class TemplatesApi extends BaseApi {
 	 *
 	 * @param int $id The template ID
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 * @todo Check for the correct response
 	 */
 	public function viewProof(int $id): array {
@@ -271,7 +274,7 @@ class TemplatesApi extends BaseApi {
 	 *
 	 * @param int $id The template ID
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 * @todo Check for the correct response
 	 */
 	public function delete(int $id): array {
@@ -293,7 +296,7 @@ class TemplatesApi extends BaseApi {
 	 *
 	 * @param int $id The template ID
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 * @todo Check for the correct response
 	 */
 	public function duplicate(int $id): array {
@@ -313,9 +316,10 @@ class TemplatesApi extends BaseApi {
 	 * ?>
 	 * </code>
 	 *
-	 * @param int $filePath File path to the image
+	 * @param string $filePath File path to the image
 	 * @return string The uploaded image url
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
+	 * @throws NotFoundException
 	 */
 	public function uploadFile(string $filePath): string {
 		if (!\is_file($filePath)) {
@@ -359,7 +363,8 @@ class TemplatesApi extends BaseApi {
 	 *     thumbnailPath: string,
 	 *     backTemplatePath: string }
 	 * } The result of the request
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws InvalidConfigException
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function upload(array $params): array {
 		//<editor-fold desc="Params basic validation">
@@ -417,7 +422,7 @@ class TemplatesApi extends BaseApi {
 	 * </code>
 	 *
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function categories(): array {
 		$request = $this->getInstance()->getRequest();
@@ -435,12 +440,11 @@ class TemplatesApi extends BaseApi {
 	 *   //
 	 *   $response = $olc->templates()->getByCategory();
 	 * ?>
-	 * @param int $categoryId Category ID
 	 * @param array{categoryIds?: int, page?: int, pageSize?: int} $params Parameters to send with the request.
 	 * </code>
 	 *
 	 * @return array{message: string, data: array} The response data.
-	 * @throws \Olc\core\OlcRequestError If the request fails.
+	 * @throws OlcRequestError If the request fails.
 	 */
 	public function allByCategory(array $params = []): array {
 		$request = $this->getInstance()->getRequest();

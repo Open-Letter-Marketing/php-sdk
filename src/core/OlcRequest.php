@@ -16,9 +16,14 @@ use Psr\Http\Message\ResponseInterface;
 class OlcRequest {
 	protected ?Client $client = null;
 
+	protected ?string $version = null;
+	protected ?string $endpoint = null;
+
 	protected string $apiKey;
 
-	public function __construct(protected string|null $version, protected string|null $endpoint = null) {
+	public function __construct(?string $version = null, ?string $endpoint = null) {
+		$this->version = $version;
+		$this->endpoint = $endpoint;
 		$this->client = new Client();
 	}
 
@@ -45,7 +50,7 @@ class OlcRequest {
 		return sprintf("%s/%s", $baseUrl, str_replace('//', '/', $endUrl));
 	}
 
-	protected function initOptions($options = []): array {
+	protected function initOptions(array $options = []): array {
 		$headers = [];
 
 		if ($options['jsonHeaders'] ?? true) {
@@ -73,7 +78,7 @@ class OlcRequest {
 	 * @return mixed The response from the API.
 	 * @throws OlcRequestError if the request fails
 	 */
-	public function post(string $route, array|null $data = [], $options = []): ResponseInterface {
+	public function post(string $route, ?array $data = [], array $options = []): ResponseInterface {
 		$options = $this->initOptions($options);
 
 		$clientOptions = [
@@ -105,7 +110,7 @@ class OlcRequest {
 	 * @return mixed The response from the API.
 	 * @throws OlcRequestError if the request fails
 	 */
-	public function patch(string $route, array|null $data = [], $options = []): ResponseInterface {
+	public function patch(string $route, ?array $data = null, array $options = []): ResponseInterface {
 		$options = $this->initOptions($options);
 
 		$clientOptions = [
@@ -137,7 +142,7 @@ class OlcRequest {
 	 * @return mixed The response from the API.
 	 * @throws OlcRequestError if the request fails
 	 */
-	public function put(string $route, array|null $data = [], $options = []): ResponseInterface {
+	public function put(string $route, ?array $data = null, array $options = []): ResponseInterface {
 		$options = $this->initOptions($options);
 
 		$clientOptions = [
@@ -166,7 +171,7 @@ class OlcRequest {
 	 * @return mixed The response from the API.
 	 * @throws OlcRequestError if the request fails
 	 */
-	public function get(string $route, $options = []): ResponseInterface {
+	public function get(string $route, array $options = []): ResponseInterface {
 		$options = $this->initOptions($options);
 
 		try {
@@ -188,7 +193,7 @@ class OlcRequest {
 	 * @return mixed The response from the API.
 	 * @throws OlcRequestError if the request fails
 	 */
-	public function delete(string $route, $options = []): ResponseInterface {
+	public function delete(string $route, array $options = []): ResponseInterface {
 		$options = $this->initOptions($options);
 
 		try {
@@ -201,7 +206,7 @@ class OlcRequest {
 		}
 	}
 
-	public function retrieveValueByPath(ResponseInterface $response, string|null $key = null): mixed {
+	public function retrieveValueByPath(ResponseInterface $response, ?string $key = null) {
 		$body = json_decode($response->getBody()->getContents(), true);
 
 		return !$key

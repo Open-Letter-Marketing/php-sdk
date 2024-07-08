@@ -32,7 +32,7 @@
     "ext-json": "*",
     "guzzlehttp/guzzle": "^7.4",
     "peridot-php/object-path": "^1.0",
-    "vlucas/phpdotenv": "^5.6",
+    "vlucas/phpdotenv": "*",
     "symfony/polyfill-php83": "^1.29"
   },
   "require-dev": {

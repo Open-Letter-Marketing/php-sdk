@@ -92,7 +92,7 @@ Each module has its own set of methods that can be used to interact with the OLC
 | `orders`       | Create or fetch orders, calculate cost and other operations.                   |
 | `orderDetails` | Retrieve detailed information against the order.                               |
 
-For detailed information regarding each module, please refer to the [API Reference](docs/index.html).
+For detailed information regarding each module, please refer to the [API Reference](https://open-letter-marketing.github.io/php-sdk/).
 
 ## Templates
 
@@ -128,4 +128,4 @@ try {
 ```
 
 ## What's next?
-To work with other modules, please refer to the [Core API Reference](docs/classes/Olc-core-OlcInstance.html#method_templates).
+To work with other modules, please refer to the [Core API Reference](https://open-letter-marketing.github.io/php-sdk/classes/Olc-core-OlcInstance.html#method_templates).

@@ -83,14 +83,14 @@ The OLC SDK for PHP is built to be modular, allowing you to easily use with ease
 for instance, the method `Instance::getInstance()->*` returns an instances of the following modules. 
 Each module has its own set of methods that can be used to interact with the OLC API.
 
-| module         | Description                                                                    |
-|----------------|--------------------------------------------------------------------------------|
-| `user`         | User module that retrieve the user information *against the api key*.          |
-| `customFields` | Custom fields module which performs actions against user-defined input fields. |
-| `templates`    | Fetches or creates new templates.                                              |
-| `products`     | Retrieve account level products.                                                    |
-| `orders`       | Create or fetch orders, calculate cost and other operations.                   |
-| `orderDetails` | Retrieve detailed information against the order.                               |
+| module                                                                                               | Description                                                                    |
+|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
+| [user](https://open-letter-marketing.github.io/php-sdk/classes/Olc-api-UserApi.html)                 | User module that retrieve the user information *against the api key*.          |
+| [customFields](https://open-letter-marketing.github.io/php-sdk/classes/Olc-api-CustomFieldsApi.html) | Custom fields module which performs actions against user-defined input fields. |
+| [templates](https://open-letter-marketing.github.io/php-sdk/classes/Olc-api-TemplatesApi.html)       | Fetches or creates new templates.                                              |
+| [products](https://open-letter-marketing.github.io/php-sdk/classes/Olc-api-ProductApi.html)          | Retrieve account level products.                                               |
+| [orders](https://open-letter-marketing.github.io/php-sdk/classes/Olc-api-OrdersApi.html)             | Create or fetch orders, calculate cost and other operations.                   |
+| [orderDetails](https://open-letter-marketing.github.io/php-sdk/classes/Olc-api-OrderDetailsApi.html) | Retrieve detailed information against the order.                               |
 
 For detailed information regarding each module, please refer to the [API Reference](https://open-letter-marketing.github.io/php-sdk/).
 

@@ -81,11 +81,10 @@ class OlcRequest {
 	public function post(string $route, ?array $data = [], array $options = []): ResponseInterface {
 		$options = $this->initOptions($options);
 
-		$clientOptions = [
+		$clientOptions = array_merge_recursive([
 			'headers' => $options['headers'] ?? [],
 			'verify' => Environment::sslVerify(),
-			...($options['client'] ?? []),
-		];
+		], $options['client'] ?? []);
 
 		if ($data !== null) {
 			$clientOptions['body'] = \count($data) ? \json_encode($data) : null;
@@ -113,11 +112,10 @@ class OlcRequest {
 	public function patch(string $route, ?array $data = null, array $options = []): ResponseInterface {
 		$options = $this->initOptions($options);
 
-		$clientOptions = [
+		$clientOptions = array_merge_recursive([
 			'headers' => $options['headers'] ?? [],
 			'verify' => Environment::sslVerify(),
-			...($options['client'] ?? []),
-		];
+		], $options['client'] ?? []);
 
 		if ($data !== null) {
 			$clientOptions['body'] = \count($data) ? \json_encode($data) : null;
@@ -145,11 +143,10 @@ class OlcRequest {
 	public function put(string $route, ?array $data = null, array $options = []): ResponseInterface {
 		$options = $this->initOptions($options);
 
-		$clientOptions = [
+		$clientOptions = array_merge_recursive([
 			'headers' => $options['headers'] ?? [],
 			'verify' => Environment::sslVerify(),
-			...($options['client'] ?? []),
-		];
+		], $options['client'] ?? []);
 
 		if ($data !== null) {
 			$clientOptions['body'] = \count($data) ? \json_encode($data) : null;

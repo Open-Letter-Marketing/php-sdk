@@ -243,7 +243,8 @@ class TemplatesApi extends BaseApi {
 	}
 
 	/**
-	 * Get view proof against the given template id
+	 * Get view proof against the given template id<br>
+	 * **Note:** You must decode the base64 string and save into .pdf file before using it
 	 * <code>
 	 * <?php
 	 *   $response = $olc->templates()->viewProof(1);
@@ -251,17 +252,17 @@ class TemplatesApi extends BaseApi {
 	 * </code>
 	 *
 	 * @param int $id The template ID
-	 * @return array{message: string, data: array} The response data.
+	 * @return string The pdf base64 string.
 	 * @throws OlcRequestError If the request fails.
 	 * @todo Check for the correct response
 	 */
-	public function viewProof(int $id): array {
+	public function viewProof(int $id): string {
 		$request = $this->getInstance()->getRequest();
 		$response = $request->get("/templates/$id/view-proof", [
 			'authorize' => true,
 		]);
 
-		return $request->retrieveValueByPath($response);
+		return $request->retrieveValueByPath($response, 'data[base64Pdf]');
 	}
 
 	/**
@@ -357,11 +358,9 @@ class TemplatesApi extends BaseApi {
 	 * </code>
 	 * @param array{jsonFile: string, thumbnailFile: string, backThumbnailFile: string} $params Parameters to send with the request.
 	 * @return array{
-	 *   message: string,
-	 *   data: array{
-	 *     templatePath: string,
-	 *     thumbnailPath: string,
-	 *     backTemplatePath: string }
+	 *  templatePath: string,
+	 *  thumbnailPath: string,
+	 *  backTemplatePath: string
 	 * } The result of the request
 	 * @throws InvalidConfigException
 	 * @throws OlcRequestError If the request fails.

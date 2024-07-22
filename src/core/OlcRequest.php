@@ -209,9 +209,15 @@ class OlcRequest {
 	public function retrieveValueByPath(ResponseInterface $response, ?string $key = null) {
 		$body = json_decode($response->getBody()->getContents(), true);
 
-		return !$key
-			? $body
-			: (new ObjectPath ($body))->get($key)?->getPropertyValue() ?? false;
+		if (!$key) {
+			return $body;
+		}
+
+		$accessor = (new ObjectPath ($body))->get($key);
+
+		return is_object($accessor) && method_exists($accessor, 'getPropertyValue')
+			? $accessor->getPropertyValue()
+			: false;
 	}
 
 	public function getClient(): Client {

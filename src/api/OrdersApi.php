@@ -233,10 +233,10 @@ class OrdersApi extends BaseApi {
 	 *
 	 * @param array{scheduledDate: string} $params Required parameters pass to the request
 	 * @param string $params ['scheduledDate'] - The ISO date *(YYYY-MM-DD)* / 'ASAP'
-	 * @return array The result of the request
+	 * @return string Expected date (e.g., 'Friday July 26, 2024')
 	 * @throws \Olc\core\OlcRequestError If the request fails.
 	 */
-	public function getExpectedMailedDate(array $params): array {
+	public function getExpectedMailedDate(array $params): string {
 		if (!\array_key_exists('scheduledDate', $params)
 			|| !is_string($params['scheduledDate'])) {
 			throw new InvalidConfigException('The "scheduledDate" parameter is required and should be a string');
@@ -247,7 +247,7 @@ class OrdersApi extends BaseApi {
 			'authorize' => true,
 		]);
 
-		return $request->retrieveValueByPath($response);
+		return $request->retrieveValueByPath($response, 'data[mailedDate]');
 	}
 
 	/**
@@ -309,17 +309,17 @@ class OrdersApi extends BaseApi {
 		}
 
 		if (\array_key_exists('tag', $params)
-			|| !is_int($params['tag'])) {
+			&& !is_int($params['tag'])) {
 			throw new InvalidConfigException('The "tag" parameter is required and should be a number');
 		}
 
 		if (\array_key_exists('reqId', $params)
-			|| !is_int($params['reqId'])) {
+			&& !is_int($params['reqId'])) {
 			throw new InvalidConfigException('The "reqId" parameter is required and should be a string');
 		}
 
 		if (\array_key_exists('contactIds', $params)
-			|| !is_array($params['contactIds'])) {
+			&& !is_array($params['contactIds'])) {
 			throw new InvalidConfigException('The "contactIds" parameter is required and should be an array');
 		}
 

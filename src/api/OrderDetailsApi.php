@@ -41,22 +41,22 @@ class OrderDetailsApi extends BaseApi {
 	 */
 	public function allContacts(int $orderId, array $params = []): array {
 		if (\array_key_exists('search', $params)
-			|| !is_string($params['search'])) {
+			&& !is_string($params['search'])) {
 			throw new InvalidConfigException('The "search" parameter must be a string');
 		}
 
 		if (\array_key_exists('addressStatus', $params)
-			|| !in_array($params['addressStatus'], static::ADDRESS_STATUSES)) {
+			&& !in_array($params['addressStatus'], static::ADDRESS_STATUSES)) {
 			throw new InvalidConfigException('The "addressStatus" parameter must be one of: '. implode(', ', static::ADDRESS_STATUSES));
 		}
 
 		if (\array_key_exists('mailedStatus', $params)
-			|| !in_array($params['mailedStatus'], static::MAILED_STATUSES)) {
+			&& !in_array($params['mailedStatus'], static::MAILED_STATUSES)) {
 			throw new InvalidConfigException('The "mailedStatus" parameter must be one of: '. implode(', ', static::MAILED_STATUSES));
 		}
 
 		if (\array_key_exists('deliveredDate', $params)
-			|| !is_array($params['deliveredDate'])) {
+			&& !is_array($params['deliveredDate'])) {
 			throw new InvalidConfigException('The "deliveredDate" parameter must be one of: '. implode(', ', static::MAILED_STATUSES));
 		}
 

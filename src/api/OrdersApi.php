@@ -180,6 +180,7 @@ class OrdersApi extends BaseApi {
 
 	/**
 	 * Create a view proof<br>
+	 *  **Note:** You must decode the base64 string and save into .pdf file before using it
 	 * <code>
 	 * <?php
 	 *   $response = $olc->orders()->viewProof([
@@ -194,10 +195,10 @@ class OrdersApi extends BaseApi {
 	 * @param int $params ['templateId'] - The template ID
 	 * @param int $params ['returnContactId'] - The return contact ID
 	 * @param int $params ['contactId'] - The contact ID
-	 * @return array{message: string, data: array} The result of the request
+	 * @return string The pdf base64 string.
 	 * @throws \Olc\core\OlcRequestError If the request fails.
 	 */
-	public function viewProof(array $params): array {
+	public function viewProof(array $params): string {
 		if (!\array_key_exists('templateId', $params)
 			|| !is_int($params['templateId'])) {
 			throw new InvalidConfigException('The "templateId" parameter is required and should be an integer');
@@ -218,7 +219,7 @@ class OrdersApi extends BaseApi {
 			'authorize' => true,
 		]);
 
-		return $request->retrieveValueByPath($response);
+		return $request->retrieveValueByPath($response, 'data[base64]');
 	}
 
 	/**

@@ -433,22 +433,35 @@ class TemplatesApi extends BaseApi {
 	}
 
 	/**
-	 * Fetch all templates by the given category id
+	 * Fetch all templates by the given tab name and product id
 	 * <code>
 	 * <?php
-	 *   //
-	 *   $response = $olc->templates()->allByCategory();
+	 *   $response = $olc->templates()->allByTab([
+	 *    'tab' => 'olc-templates',
+	 *    'page' => 1,
+	 *    'PageSize' => 10,
+	 *    'productId' => 1,
+	 *    'categoryIds' => [5]
+	 *   ]);
 	 * ?>
-	 * @param array{categoryIds?: int, page?: int, pageSize?: int} $params Parameters to send with the request.
+	 * @param array{
+	 *     tab: string,
+	 *     productId: int,
+	 *     categoryIds?: int[],
+	 *     page?: int,
+	 *     pageSize?: int
+	 * } $params Parameters to send with the request.
 	 * </code>
 	 *
 	 * @return array{message: string, data: array} The response data.
 	 * @throws OlcRequestError If the request fails.
 	 */
-	public function allByCategory(array $params = []): array {
+	public function allByTab(array $params = []): array {
 		$request = $this->getInstance()->getRequest();
-		$query = \count($params) ? '?' . \http_build_query($params) : '';
-		$response = $request->get('/templates/by-tab' . $query, [
+		$response = $request->post('/templates/by-tab', array_merge_recursive([
+			'tab' => 'olc-templates',
+			'productId' => 1,
+		], $params), [
 			'authorize' => true,
 		]);
 

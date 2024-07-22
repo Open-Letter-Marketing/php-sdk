@@ -438,7 +438,7 @@ class TemplatesApi extends BaseApi {
 	 * <code>
 	 * <?php
 	 *   //
-	 *   $response = $olc->templates()->getByCategory();
+	 *   $response = $olc->templates()->allByCategory();
 	 * ?>
 	 * @param array{categoryIds?: int, page?: int, pageSize?: int} $params Parameters to send with the request.
 	 * </code>

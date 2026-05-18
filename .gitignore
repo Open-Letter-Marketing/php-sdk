@@ -8,6 +8,3 @@ phpunit.xml
 *.zip
 *.rar
 main*.php
-temp_auto_push.bat
-temp_interactive_push.bat
-.gitignore
